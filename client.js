@@ -403,7 +403,12 @@ TrelloPowerUp.initialize({
     return getBoardButtons(t);
   },
   'card-badges': function(t, options){
-    return getBadges(t);
+    return t.card('all')
+    .then(function(card) {
+      console.log(card)
+      return []
+    })
+    //return getBadges(t);
   },
   'card-buttons': function(t, options) {
     return getButtons(t);
