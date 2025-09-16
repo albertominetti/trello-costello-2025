@@ -403,9 +403,12 @@ TrelloPowerUp.initialize({
     return getBoardButtons(t);
   },
   'card-badges': function(t, options){
+    limit=0
     return t.card('all')
     .then(function(card) {
+      if (limit>0) return []
       console.log(card)
+      limit++
       return [{
         text: card.idShort
       }]
