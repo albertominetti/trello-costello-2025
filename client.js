@@ -1,4 +1,5 @@
 /* global TrelloPowerUp */
+console.log("Hello world!")
 
 var Promise = TrelloPowerUp.Promise;
 
