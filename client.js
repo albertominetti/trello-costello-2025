@@ -352,7 +352,9 @@ var getButtons = function(t) {
       console.log("cost: " + cost)
       buttons.push({
         icon: SIGMA_ICON, 
-        text: costs && costs[idx] ? costFields[idx] + ': ' + parseFloat(costs[idx]).toLocaleString(undefined,{minimumFractionDigits:2}) :'Add ' + costFields[idx] + '...',
+        text: costs && costs[idx] 
+          ? costFields[idx] + ': ' + parseFloat(costs[idx]).toLocaleString(undefined,{minimumFractionDigits:2}) 
+          :'Add ' + costFields[idx] + '...',
         callback: t.memberCanWriteToModel('card') ? function(t) {
           return t.popup({
             title: 'Set ' + costFields[idx] + '...',
@@ -397,6 +399,8 @@ var getButtons = function(t) {
         } : null
       });
     });
+    
+    console.log("Buttons: " + JSON.stringify(buttons, null, 2))
     return buttons;
   });
   });
