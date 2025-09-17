@@ -403,9 +403,9 @@ TrelloPowerUp.initialize({
   //   return getBoardButtons(t);
   // },
   'card-badges': function(t, options){
-    return t.card('all')
+    return t.card('id')
     .then(function(card) {
-      console.log(card)
+      console.log(t.get('card', 'shared', 'costs'))
       return [{
         text: card.idShort,
         color: "green",
