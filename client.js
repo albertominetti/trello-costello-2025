@@ -399,25 +399,16 @@ var getButtons = function(t) {
 }
 
 TrelloPowerUp.initialize({
-  // 'board-buttons': function(t, options){
-  //   return getBoardButtons(t);
-  // },
-  'card-badges': function(t, options){
-    return t.get('card', 'shared', 'costs')
-      .then(function(costs){
-        console.log("10:53")
-        console.log(costs)
-        return [{
-          text: costs,
-          color: "green",
-        }]
-      })
-    //return getBadges(t);
+  'board-buttons': function(t, options){
+    return getBoardButtons(t);
   },
-  // 'card-buttons': function(t, options) {
-  //   return getButtons(t);
-  // },
-  // 'show-settings': function(t, options) {
-  //   return getSettings(t);
-  // }
+  'card-badges': function(t, options){
+    return getBadges(t);
+  },
+  'card-buttons': function(t, options) {
+    return getButtons(t);
+  },
+  'show-settings': function(t, options) {
+    return getSettings(t);
+  }
 });
