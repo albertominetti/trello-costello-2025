@@ -405,6 +405,7 @@ TrelloPowerUp.initialize({
   'card-badges': function(t, options){
     return t.get('card', 'shared', 'costs')
       .then(function(costs){
+        console.log("10:53")
         console.log(costs)
         return [{
           text: costs,
