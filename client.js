@@ -403,17 +403,14 @@ TrelloPowerUp.initialize({
   //   return getBoardButtons(t);
   // },
   'card-badges': function(t, options){
-    return t.card('id')
-    .then(function(card) {
-      t.get('card', 'shared', 'costs')
-        .then(function(costs){
-          console.log(costs)
-        })
-      return [{
-        text: card.idShort,
-        color: "green",
-      }]
-    })
+    return t.get('card', 'shared', 'costs')
+      .then(function(costs){
+        console.log(costs)
+        return [{
+          text: costs,
+          color: "green",
+        }]
+      })
     //return getBadges(t);
   },
   // 'card-buttons': function(t, options) {
