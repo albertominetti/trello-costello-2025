@@ -401,6 +401,14 @@ var getButtons = function(t) {
   });
 }
 
+var t = window.TrelloPowerUp.iframe();
+
+t.get('board', 'shared', 'costFields')
+.then(function (data) {
+  console.log(JSON.stringify(data, null, 2));
+});
+
+
 TrelloPowerUp.initialize({
   'board-buttons': function(t, options){
     return getBoardButtons(t);
