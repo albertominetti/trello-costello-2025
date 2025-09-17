@@ -405,7 +405,10 @@ TrelloPowerUp.initialize({
   'card-badges': function(t, options){
     return t.card('id')
     .then(function(card) {
-      console.log(t.get('card', 'shared', 'costs'))
+      t.get('card', 'shared', 'costs')
+        .then(function(costs){
+          console.log(costs)
+        })
       return [{
         text: card.idShort,
         color: "green",
