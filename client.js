@@ -1,5 +1,5 @@
 /* global TrelloPowerUp */
-console.log("11:33")
+console.log("11:50")
 
 var Promise = TrelloPowerUp.Promise;
 
@@ -342,6 +342,7 @@ var getSettings = function(t) {
 var getButtons = function(t) {
   return t.get('board', 'shared', 'costFields')
   .then(function(costFields){
+    console.log("Cost fields: " + costFields)
   return t.get('card', 'shared', 'costs')
   .then(function(costs){
     var buttons = [];  
@@ -400,14 +401,6 @@ var getButtons = function(t) {
   });
   });
 }
-
-var t = window.TrelloPowerUp.iframe();
-
-t.get('board', 'shared', 'costFields')
-.then(function (data) {
-  console.log(JSON.stringify(data, null, 2));
-});
-
 
 TrelloPowerUp.initialize({
   'board-buttons': function(t, options){
