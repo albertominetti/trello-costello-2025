@@ -1,5 +1,5 @@
 /* global TrelloPowerUp */
-console.log("Hello world!")
+console.log("11:11")
 
 var Promise = TrelloPowerUp.Promise;
 
@@ -346,6 +346,9 @@ var getButtons = function(t) {
   .then(function(costs){
     var buttons = [];  
     costFields.forEach(function(cost, idx){
+      console.log("Costs: " + costs)
+      console.log("cost: " + cost + " id: " + idx)
+      console.log("cost: " + cost)
       buttons.push({
         icon: SIGMA_ICON, 
         text: costs && costs[idx] ? costFields[idx] + ': ' + parseFloat(costs[idx]).toLocaleString(undefined,{minimumFractionDigits:2}) :'Add ' + costFields[idx] + '...',
