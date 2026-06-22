@@ -16,7 +16,7 @@ var getBadges = function(t){
   return t.get('board', 'shared', 'costs')
   .then(function(oldCosts) {
     var returnCosts = function () {
-      return t.get('card', 'shared', 'costs')
+      return t.get(card.id, 'shared', 'costs')
       .then(function(costs){
       return t.get('board', 'shared', 'costFields')
       .then(function(costFields){
@@ -47,7 +47,7 @@ var getBadges = function(t){
             // is always the default title.
             var newCostArray = [];
             newCostArray.push(costs['Total Cost']);
-            return t.set('card', 'shared', 'costs', newCostArray)
+            return t.set(card.id, 'shared', 'costs', newCostArray)
             .then(function() {
               return t.set('board','shared','refresh',Math.random())
               .then(function() {
@@ -63,7 +63,7 @@ var getBadges = function(t){
     }
     // oldcosts: these are legacy costs from v1 that were stored on the board-level object
     if (oldCosts && oldCosts[card.id]) {
-      return t.set('card', 'shared', 'costs', [oldCosts[card.id]])
+      return t.set(card.id, 'shared', 'costs', [oldCosts[card.id]])
       .then(function() {
         delete oldCosts[card.id];
         return t.set('board', 'shared', 'costs', oldCosts)
@@ -339,10 +339,13 @@ var getSettings = function(t) {
 }
 
 var getButtons = function(t) {
-  return t.get('board', 'shared', 'costFields')
-  .then(function(costFields){
-  return t.get('card', 'shared', 'costs')
-  .then(function(costs){
+  return t.card('id')
+  .then(function(card) {
+    var cardId = card.id;
+    return t.get('board', 'shared', 'costFields')
+    .then(function(costFields){
+    return t.get(cardId, 'shared', 'costs')
+    .then(function(costs){
     var buttons = [];  
     costFields.forEach(function(cost, idx){
       buttons.push({
@@ -357,9 +360,9 @@ var getButtons = function(t) {
                 text: !Number.isNaN(parseFloat(options.search)) ? 'Set ' + costFields[idx] + ' to ' + parseFloat(newCost).toLocaleString(undefined,{minimumFractionDigits:2}) : '(Enter a number to set ' + costFields[idx] + '.)',
                 callback: function(t) {
                   if (newCost != 'NaN') {
-                    var newCosts = costs ? costs : Array(costFields.length).fill(null);
+                    var newCosts = costs ? costs.slice() : Array(costFields.length).fill(null);
                     newCosts[idx] = newCost;
-                    return t.set('card','shared','costs', newCosts)
+                    return t.set(cardId, 'shared', 'costs', newCosts)
                     .then(function() {
                       return t.set('board','shared','refresh',Math.random())
                       .then(function() {
@@ -374,9 +377,9 @@ var getButtons = function(t) {
                 buttons.push({
                   text: 'Remove ' + costFields[idx] + '.',
                   callback: function(t) {
-                    var newCosts = costs ? costs : Array(costFields.length).fill(null);
+                    var newCosts = costs ? costs.slice() : Array(costFields.length).fill(null);
                     newCosts[idx] = null;
-                    t.set('card','shared','costs', newCosts);
+                    t.set(cardId, 'shared', 'costs', newCosts);
                     return t.closePopup();
                   }
                 });
@@ -393,6 +396,7 @@ var getButtons = function(t) {
       });
     });
     return buttons;
+  });
   });
   });
 }
