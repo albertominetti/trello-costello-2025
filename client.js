@@ -3,6 +3,7 @@
 var Promise = TrelloPowerUp.Promise;
 
 var SIGMA_ICON = './sigma.svg';
+var COSTELLO_VERSION = '2026.06-dev';
 
 var getBadges = function(t){
   // we used to store costs in a board-level object, but 
@@ -174,6 +175,7 @@ var getBoardButtons = function(t) {
                 });
               }
               
+              entries.push({text: 'ℹ️ Costello ' + COSTELLO_VERSION});
               entries.push({text: '🔍 Summary by Column...', callback: summaryByColumn});
               entries.push({text: '🔍 Summary by Label...', callback: summaryByLabel});
               costArray.forEach(function(cardCosts, cardIdx) {
